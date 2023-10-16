@@ -27,7 +27,7 @@ body {
   width: 200px;
 }
 .title {
-  font-size: 90px;
+  font-size: 100px;
   margin-top: 5%;
   margin-bottom: 3%;
   color: aqua;
@@ -86,4 +86,8 @@ body {
 }
 #countdown {
   width: 500px;
+}
+
+.buttons button {
+  font-size: 30px;
 }

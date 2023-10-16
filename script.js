@@ -3,11 +3,6 @@ mole.addEventListener("click", function () {
   mole.style.display = "none";
 });
 
-document.querySelector("h1").addEventListener("click", function (e) {
-  console.log("remove");
-  e.target.innerHTML = "";
-});
-
 let timeleft = 15;
 let downloadTimer;
 
@@ -29,10 +24,15 @@ function startTimer() {
 
 document.querySelector(".play").addEventListener("click", startTimer);
 
+document.querySelector(".stop").addEventListener("click", function () {
+  clearInterval(downloadTimer);
+  document.getElementById("countdown").innerHTML = "Press 'PLAY' to start";
+});
+
 let currMoleTile;
 let score = 0;
 let gameOver = false;
 
 window.onload = function () {
-  // setGame(); // If you have a function called setGame, you can call it here
+  document.getElementById("countdown").innerHTML = "Press 'PLAY' to start";
 };
