@@ -28,7 +28,10 @@ body {
 }
 .title {
   font-size: 90px;
-  margin-bottom: 9%;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  color: aqua;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 .score {
@@ -73,4 +76,14 @@ body {
   /* animation: appear 0.3s linear; */
   /* background-image: url("images/mole.png"); */
   /* pointer-events: none; */
+}
+
+.game-over {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  color: red;
+}
+#countdown {
+  width: 500px;
 }
