@@ -1,4 +1,5 @@
 const mole = document.querySelector(".mole");
+const bomb = document.querySelector(".bomb");
 const holes = document.querySelectorAll(".hole");
 let timeleft = 15;
 let timer;
@@ -7,14 +8,26 @@ let score = 0;
 
 function moveMole() {
   const randomHole = getRandomHole(holes);
-  randomHole.appendChild(mole);
-  mole.style.display = "block";
-  mole.classList.add("mole-animate");
+  const randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
+  if (randomChoice === "mole") {
+    randomHole.appendChild(mole);
+    mole.style.display = "block";
+    mole.classList.add("mole-animate");
+    bomb.style.display = "none";
+  } else {
+    randomHole.appendChild(bomb);
+    bomb.style.display = "block";
+    bomb.classList.add("bomb-animate");
+    mole.style.display = "none";
+  }
 }
 
 function startTimer() {
-  const countdownElem = document.getElementById("countdown");
-  (score = 0), 100;
+  timeleft = 15;
+  const timerDisplayElement = document.getElementById("countdown");
+  timerDisplayElement.innerHTML = timeleft;
+
+  score = 0;
   document.querySelector(".points span").textContent = score;
   mole.style.display = "none";
   mole.classList.remove("mole-animate");
@@ -24,20 +37,18 @@ function startTimer() {
     moleTimer = setInterval(moveMole, 1500);
 
     clearInterval(timer);
-    timeleft -= 1;
-    document.getElementById("countdown").innerHTML = timeleft;
 
     timer = setInterval(function () {
       if (timeleft <= 0) {
         clearInterval(timer);
         clearInterval(moleTimer);
-        const countdownElem = document.getElementById("countdown");
-        countdownElem.innerHTML = "GAME OVER";
-        countdownElem.classList.add("game-over");
+        timerDisplayElement.innerHTML = "GAME OVER";
+        timerDisplayElement.classList.add("game-over");
+        timerDisplayElement.classList.remove("you-win");
         mole.style.display = "none";
       } else {
         timeleft -= 1;
-        document.getElementById("countdown").innerHTML = timeleft;
+        timerDisplayElement.innerHTML = timeleft;
       }
     }, 1000);
   }, 1000);
@@ -52,6 +63,7 @@ document.querySelector(".stop").addEventListener("click", function () {
   mole.classList.remove("mole-animate");
   document.getElementById("countdown").innerHTML = "Press 'PLAY' to start";
   score = 0;
+
   document.querySelector(".points span").textContent = score;
 });
 
@@ -70,12 +82,27 @@ mole.addEventListener("click", function () {
   score += 10;
   document.querySelector(".points span").textContent = score;
 
+  bomb.addEventListener("click", function () {
+    bomb.style.display = "none";
+    bomb.classList.remove("bomb-animate");
+    score -= 50;
+    document.querySelector(".points span").textContent = score;
+
+    clearInterval(timer);
+    clearInterval(moleTimer);
+    const timerDisplayElement = document.getElementById("countdown");
+    timerDisplayElement.innerHTML = "GAME OVER";
+    timerDisplayElement.classList.add("game-over");
+    timerDisplayElement.classList.remove("you-win");
+  });
+
   if (score >= 100) {
     clearInterval(timer);
     clearInterval(moleTimer);
-    const countdownElem = document.getElementById("countdown");
-    countdownElem.innerHTML = "YOU WIN!";
-    countdownElem.classList.add("you-win");
+    const timerDisplayElement = document.getElementById("countdown");
+    timerDisplayElement.innerHTML = "YOU WIN!";
+    timerDisplayElement.classList.add("you-win");
+    timerDisplayElement.classList.remove("game-over");
     mole.style.display = "none";
   }
 });
