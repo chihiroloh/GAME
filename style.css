@@ -34,8 +34,10 @@ body {
   font-family: "Pixelify Sans", sans-serif;
 }
 
-.score {
-  font-size: 40px;
+.points {
+  font-size: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .board {
@@ -49,45 +51,57 @@ body {
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .hole {
-  border: 3px solid blue;
   position: relative;
   background-color: black;
   border-radius: 50%;
-  box-shadow: inset 0 10px 0 7px orange;
+  box-shadow: inset 0 10px 0 7px rgb(78, 45, 14);
   width: 160px;
   height: 70px;
   margin-top: 1em;
+  overflow: hidden;
 }
 
 .mole {
-  /* height: 200px; */
-  /* width: 300px; */
+  display: none;
   position: absolute;
   height: 200px;
   top: -50px;
   left: -30px;
-  /* top: 220px;
-  left: 285px; */
-  /* bottom: 0; */
   z-index: 1;
-  /* animation: appear 0.3s linear; */
-  /* background-image: url("images/mole.png"); */
-  /* pointer-events: none; */
+}
+@keyframes appear {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-1%);
+  }
 }
 
-.game-over {
-  font-size: 50px;
-  font-weight: bold;
-  text-align: center;
-  color: red;
+.mole-animate.appear {
+  animation: appear 1s forwards;
 }
+
+#countdown.you-win {
+  color: greenyellow;
+}
+
 #countdown {
   width: 500px;
+  color: white;
+}
+
+#countdown.game-over {
+  font-size: 50px;
+  text-align: center;
+  color: red;
 }
 
 .buttons button {
   font-size: 30px;
+  margin-bottom: 20px;
 }
