@@ -8,7 +8,8 @@ let score = 0;
 
 function moveMole() {
   const randomHole = getRandomHole(holes);
-  const randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
+  const randomChoice = Math.random() < 0.66 ? "mole" : "bomb"; // 66% chance for mole, 34% for bomb
+
   if (randomChoice === "mole") {
     randomHole.appendChild(mole);
     mole.style.display = "block";
@@ -71,6 +72,10 @@ window.onload = function () {
   document.getElementById("countdown").innerHTML = "Press 'PLAY' to start";
 };
 
+document.querySelector(".stop").addEventListener("click", function () {
+  location.reload();
+});
+
 function getRandomHole(holes) {
   const idx = Math.floor(Math.random() * holes.length);
   return holes[idx];
@@ -79,22 +84,8 @@ function getRandomHole(holes) {
 mole.addEventListener("click", function () {
   mole.style.display = "none";
   mole.classList.remove("mole-animate");
-  score += 10;
+  score += 20;
   document.querySelector(".points span").textContent = score;
-
-  bomb.addEventListener("click", function () {
-    bomb.style.display = "none";
-    bomb.classList.remove("bomb-animate");
-    score -= 50;
-    document.querySelector(".points span").textContent = score;
-
-    clearInterval(timer);
-    clearInterval(moleTimer);
-    const timerDisplayElement = document.getElementById("countdown");
-    timerDisplayElement.innerHTML = "GAME OVER";
-    timerDisplayElement.classList.add("game-over");
-    timerDisplayElement.classList.remove("you-win");
-  });
 
   if (score >= 100) {
     clearInterval(timer);
@@ -105,4 +96,19 @@ mole.addEventListener("click", function () {
     timerDisplayElement.classList.remove("game-over");
     mole.style.display = "none";
   }
+});
+
+bomb.addEventListener("click", function () {
+  bomb.style.display = "none";
+  bomb.classList.remove("bomb-animate");
+  // score -= 50;
+  // if (score < 0) score = 0;
+  // document.querySelector(".points span").textContent = score;
+
+  clearInterval(timer);
+  clearInterval(moleTimer);
+  const timerDisplayElement = document.getElementById("countdown");
+  timerDisplayElement.innerHTML = "GAME OVER";
+  timerDisplayElement.classList.add("game-over");
+  timerDisplayElement.classList.remove("you-win");
 });

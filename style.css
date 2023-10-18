@@ -86,11 +86,17 @@ body {
 .bomb {
   display: none;
   position: absolute;
-  height: auto;
-  width: 100%;
-  z-index: 1;
+  height: 400%;
+  width: 180%;
+  z-index: 200;
+  top: -90px;
+  left: -70px;
 }
-
+@keyframes appear {
+  0% {
+    transform: translateY();
+  }
+}
 .bomb-animate {
   animation: appear 1s forwards;
 }
@@ -116,4 +122,8 @@ body {
 .buttons button {
   font-size: 30px;
   margin-bottom: 20px;
+}
+
+.hammer {
+  cursor: url("images/hammer.png") 10 40, auto;
 }
