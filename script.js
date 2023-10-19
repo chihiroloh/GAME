@@ -5,10 +5,24 @@ let timeleft = 15;
 let timer;
 let moleTimer;
 let score = 0;
+let moleAppearances = 0;
+let bombAppearances = 0;
 
 function moveMole() {
   const randomHole = getRandomHole(holes);
-  const randomChoice = Math.random() < 0.66 ? "mole" : "bomb"; // 66% chance for mole, 34% for bomb
+  let randomChoice;
+
+  if (moleAppearances < 5) {
+    randomChoice = "mole";
+    randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
+    if (randomChoice === "mole") {
+      moleAppearances++;
+    } else {
+      bombAppearances++;
+    }
+  } else {
+    randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
+  }
 
   if (randomChoice === "mole") {
     randomHole.appendChild(mole);

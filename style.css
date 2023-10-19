@@ -74,14 +74,6 @@ body {
   left: -30px;
   z-index: 1;
 }
-@keyframes appear {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(-1%);
-  }
-}
 
 .bomb {
   display: none;
@@ -92,18 +84,29 @@ body {
   top: -90px;
   left: -70px;
 }
-@keyframes appear {
-  0% {
-    transform: translateY();
-  }
-}
+
 .bomb-animate {
   animation: appear 1s forwards;
+}
+@keyframes bomb-appear {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-1%);
+  }
 }
 .mole-animate {
   animation: appear 1s forwards;
 }
-
+@keyframes mole-appear {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-1%);
+  }
+}
 #countdown.you-win {
   color: greenyellow;
 }
