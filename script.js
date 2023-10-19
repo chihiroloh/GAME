@@ -10,30 +10,35 @@ let bombAppearances = 0;
 
 function moveMole() {
   const randomHole = getRandomHole(holes);
-  let randomChoice;
 
-  if (moleAppearances < 5) {
-    randomChoice = "mole";
-    randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
+  if (moleAppearances < 5 && bombAppearances < 2) {
+    const randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
+
     if (randomChoice === "mole") {
+      randomHole.appendChild(mole);
+      mole.style.display = "block";
+      mole.classList.add("mole-animate");
+      bomb.style.display = "none";
       moleAppearances++;
     } else {
+      randomHole.appendChild(bomb);
+      bomb.style.display = "block";
+      bomb.classList.add("bomb-animate");
+      mole.style.display = "none";
       bombAppearances++;
     }
-  } else {
-    randomChoice = Math.random() < 0.5 ? "mole" : "bomb";
-  }
-
-  if (randomChoice === "mole") {
+  } else if (moleAppearances < 5) {
     randomHole.appendChild(mole);
     mole.style.display = "block";
     mole.classList.add("mole-animate");
     bomb.style.display = "none";
-  } else {
+    moleAppearances++;
+  } else if (bombAppearances < 2) {
     randomHole.appendChild(bomb);
     bomb.style.display = "block";
     bomb.classList.add("bomb-animate");
     mole.style.display = "none";
+    bombAppearances++;
   }
 }
 
